@@ -1,0 +1,10 @@
+group 'org.pokebot.patcher'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    implementation group: 'org.ow2.asm', name: 'asm-commons', version: '9.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-metadata-jvm', version: '0.2.0'
+    implementation project(':pokebot-api')
+}

@@ -1,0 +1,39 @@
+group 'org.pokebot'
+version '1.0-SNAPSHOT'
+
+ext {
+    /**
+     * The result of the patcher.
+     */
+    PATCHED_LOCATION = 'C:/Users/Cripperu/Desktop/pbo-patched.jar'
+
+    /**
+     * The folder that contains the PBO assets (PBO installation folder).
+     */
+    ASSET_LOCATION = 'C:/Users/Cripperu/Desktop/pbo-windows'
+}
+
+repositories {
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+dependencies {
+    runtimeOnly name: 'pbo'
+    implementation project(':pokebot-api')
+    implementation group: 'com.google.inject', name: 'guice', version: '5.0.1'
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+task jarWithDependencies(type: Jar) {
+    setArchivesBaseName(project.name + '-all')
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task run(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath, PATCHED_LOCATION
+    main 'com.pbo.desktop.DesktopLauncher'
+    workingDir = file(ASSET_LOCATION)
+}

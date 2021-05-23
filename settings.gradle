@@ -1,0 +1,5 @@
+rootProject.name = 'pokebot'
+include 'pokebot-patcher'
+include 'pokebot-api'
+include 'pokebot-client'
+
